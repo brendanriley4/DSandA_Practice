@@ -39,8 +39,15 @@ for %%f in (%source%\*) do (
     if !exit_code! lss 2 (
         echo File moved successfully, deleting from source...
         del "%%f" > nul 2>&1
+        
+        :: Navigate to the destination folder and run git add
+        pushd !destination!
+        git add "%%~nxf"
+        echo Added to git: %%~nxf
+        popd
+        
     ) else (
-        echo Failed to move the file, not deleting.
+        echo Failed to move the file, not deleting or adding to a git.
     )
 
     :skip
