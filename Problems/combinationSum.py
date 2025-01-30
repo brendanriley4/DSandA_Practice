@@ -3,21 +3,23 @@ from typing import List
 
 class Solution:
     def combinationSum(self, candidates: List[int], target: int) -> List[List[int]]:
-        ans = []
-        sol = []
-        nums = candidates
-        n = len(nums)
+        ans, sol = [], []
 
-        def backtrack(i, cur_sum):
-            if cur_sum == target:
-                ans.append(sol)
+        def backtrack():
+            if sum(sol) == target:
+                ans.append(sol[:])
                 return
-            if cur_sum > target or i == n:
+            if sum(sol) > target or len(sol) == len(candidates):
                 return
-            backtrack(i + 1, cur_sum)
-            sol.append(nums[i])
-            backtrack(i, cur_sum + nums[i])
-            sol.pop()
+            for num in candidates:
+                ans.append(num)
+                backtrack()
+                ans.pop()
 
-        backtrack(0, 0)
         return ans
+
+
+if __name__ == '__mai__':
+    solution = Solution()
+
+    print(solution.combinationSum([2,3,6,7], 7))

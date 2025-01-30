@@ -1,21 +1,20 @@
-class Solution(object):
-    def majorityElement(self, nums):
-        """
-        :type nums: List[int]
-        :rtype: int
-        """
+from typing import List
+
+
+class Solution:
+    def majorityElement(self, nums: List[int]) -> int:
         myDict = {}
-        length = len(nums)
         for num in nums:
-            if num not in myDict:
-                myDict[num] = 1
-            else:
+            if num in myDict:
                 myDict[num] += 1
-            if myDict[num] > (length / 2):
+            else:
+                myDict[num] = 1
+        ans = len(nums) // 2
+        for num in myDict:
+            if myDict[num] > ans:
                 return num
 
+
 if __name__ == '__main__':
-    testCase = [2,2,1,1,1,2,2]
     solution = Solution()
-    ans = solution.majorityElement(testCase)
-    print(f"{ans}")
+    print(solution.majorityElement([1,1,1,1,1,1,9,9,9,9,9,9,9,9,9,9,9,9]))
