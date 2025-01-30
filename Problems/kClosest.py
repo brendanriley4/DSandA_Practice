@@ -4,7 +4,7 @@ from typing import List
 
 class Solution:
     def kClosest(self, points: List[List[int]], k: int) -> List[List[int]]:
-        ret = []
+        ret = [[]]
         min_heap = []
         for point in points:
             dist = math.sqrt(point[0] ** 2 + point[1] ** 2)
